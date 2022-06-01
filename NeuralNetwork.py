@@ -1,8 +1,8 @@
 import numpy as np
 
 class NeuralNetwork:
-    def __init__(self, learning_rate):
-        self.weights = np.array([np.random.randn(), np.random.randn()])
+    def __init__(self, learning_rate, input_size):
+        self.weights = np.random.rand(input_size)
         self.bias = np.random.randn()
         self.learning_rate = learning_rate
 
@@ -50,7 +50,7 @@ class NeuralNetwork:
             random_data_index = np.random.randint(len(input_vectors))
 
             input_vector = input_vectors[random_data_index]
-            target = targets[random_data_index]
+            target = targets[0][random_data_index]
 
             # Compute the gradients and update the weights
             derror_dbias, derror_dweights = self._compute_gradients(
@@ -65,7 +65,7 @@ class NeuralNetwork:
                 # Loop through all the instances to measure the error
                 for data_instance_index in range(len(input_vectors)):
                     data_point = input_vectors[data_instance_index]
-                    target = targets[data_instance_index]
+                    target = targets[0][data_instance_index]
 
                     prediction = self.predict(data_point)
                     error = np.square(prediction - target)
