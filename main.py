@@ -84,6 +84,17 @@ def split_data(X,y,testpercent):
         
     return Xtrain, ytrain, Xtest, ytest
 
+#This function takes in an n x 4096 data matrix X and an index i. It extracts
+#the ith row of X and displays it as a grayscale 64 x 64 image.
+
+def show_image(X, i):
+    #select image
+    image = X[:,i]
+    #reshape make into a square
+    image = image.reshape((64,64))
+    #display the image
+    plt.imshow(image,'gray')
+
 
 #This code implements the PCA exactly as in MATLAB so as to be consistent.
 #It takes in an n x d data matrix X and returns a d x d orthonormal matrix pcaX. 
@@ -132,13 +143,13 @@ ytrain = np.transpose(ytrain)
 
 
 #reducing the data
-Xtrain_reduced, Xtest_reduced = reduce_data(Xtrain,Xtest,10)
+#Xtrain_reduced, Xtest_reduced = reduce_data(Xtrain,Xtest,10)
 
-#print(Xtrain_reduced.shape)
-#print(ytrain)
+show_image(pca(Xtrain), 0)
+plt.show() 
 
 
-
+'''
 input_vectors = Xtrain_reduced
 targets = ytrain
 learning_rate = 0.1
@@ -152,3 +163,4 @@ plt.xlabel("Iterations")
 plt.ylabel("Error for all training instances")
 plt.savefig("cumulative_error.png")
 plt.show() 
+'''
